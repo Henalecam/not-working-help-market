@@ -1,0 +1,17 @@
+{
+  "short_name": "helmart",
+  "name": "Help Market",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "description": "Help Market",
+  "icons": {
+    "128": "icon.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png"
+    }
+  }
+}
