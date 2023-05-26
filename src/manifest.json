@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "HelMart",
+  "version": "1.0",
+  "description": "HelMart",
+  "icons": {
+    "16": "./assets/icon.png"
+  },
+  "action": {
+    "default_icon": "./assets/icon.png"
+  }
+}
