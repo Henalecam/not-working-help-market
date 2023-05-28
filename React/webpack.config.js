@@ -9,6 +9,8 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     popup: path.resolve('src/popup/index.tsx'),
+    options: path.resolve('src/options/options.tsx'),
+    background: path.resolve('src/background/background.ts'),
   },
   module: {
     rules: [
@@ -39,6 +41,10 @@ module.exports = {
           },
         ],
       },
+      {
+        type: 'assets/resource',
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+      },
            ]
   },
   plugins: [
@@ -47,18 +53,26 @@ module.exports = {
         { from: path.resolve('src/static'), to: path.resolve('dist') },
       ],
       }),
-    new HtmlPlugin({
-      title: 'Help Market',
-      filename: 'popup.html',
-      chunks: ['popup'],
-    }),
-    
+      ...getHtmlPlugins(['popup', 'options']), 
     ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
   },
   output: {
     filename: '[name].js',
-  }
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+  
 
 }
+    function getHtmlPlugins(chunks) {
+    return chunks.map(chunk => new HtmlPlugin({
+      title: 'Help Market',
+      filename: `${chunk}.html`,
+      chunks: [chunk]
+    }))
+  }
